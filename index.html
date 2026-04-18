@@ -6,27 +6,21 @@
   <title>Strona w budowie</title>
   <style>
     :root {
-      --sky-top: #fff6dc;
-      --sky-bottom: #ffd8a8;
-      --sun: #ffcd5b;
-      --card: rgba(255, 250, 240, 0.78);
-      --card-border: rgba(173, 112, 31, 0.16);
-      --shadow: rgba(95, 52, 16, 0.16);
-      --headline: #5c2f12;
-      --accent: #d7862f;
-      --grass-dark: #5b8d38;
-      --grass-light: #81b84e;
-      --roof: #c85f32;
-      --wall: #fff5e6;
-      --trim: #9e512d;
-      --window: #a8dbf5;
-      --path: #d9c4a6;
-      --crane: #f7c52e;
-      --crane-dark: #bf9311;
-      --flower-a: #f17070;
-      --flower-b: #ffb84d;
-      --flower-c: #8d7cf6;
-      --flower-d: #ffffff;
+      --canvas: #f6f0e6;
+      --canvas-deep: #eadfcc;
+      --panel: rgba(255, 252, 247, 0.78);
+      --panel-border: rgba(98, 76, 53, 0.12);
+      --ink: #38281b;
+      --muted: #78624c;
+      --accent: #d7a623;
+      --accent-deep: #b38312;
+      --sage: #7f9575;
+      --sage-deep: #5d7255;
+      --roof: #8d503d;
+      --stone: #d8c9b4;
+      --window: #d7e5e6;
+      --line: rgba(63, 47, 32, 0.25);
+      --shadow: rgba(53, 37, 19, 0.16);
     }
 
     * {
@@ -39,239 +33,297 @@
       display: grid;
       place-items: center;
       padding: 24px;
+      color: var(--ink);
       background:
-        radial-gradient(circle at top, rgba(255, 255, 255, 0.7) 0, rgba(255, 255, 255, 0) 38%),
-        linear-gradient(180deg, var(--sky-top) 0%, #ffe7c4 42%, #ffc98d 100%);
-      font-family: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif;
-      color: var(--headline);
+        radial-gradient(circle at top, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 34%),
+        linear-gradient(180deg, var(--canvas) 0%, #efe4d2 54%, var(--canvas-deep) 100%);
+      font-family: "Avenir Next", "Segoe UI", sans-serif;
     }
 
-    main {
-      width: min(100%, 980px);
-      padding: clamp(20px, 4vw, 34px);
-      border: 1px solid var(--card-border);
-      border-radius: 32px;
-      background: var(--card);
+    .shell {
+      width: min(100%, 1080px);
+      border-radius: 36px;
+      border: 1px solid var(--panel-border);
+      background: var(--panel);
+      box-shadow: 0 28px 80px var(--shadow);
       backdrop-filter: blur(14px);
-      box-shadow: 0 24px 70px var(--shadow);
+      overflow: hidden;
+      position: relative;
+      isolation: isolate;
+    }
+
+    .shell::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 16% 14%, rgba(255, 255, 255, 0.5), transparent 28%),
+        radial-gradient(circle at 84% 12%, rgba(215, 166, 35, 0.16), transparent 24%);
+      z-index: -1;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(280px, 1fr) minmax(360px, 1.2fr);
+      gap: clamp(24px, 4vw, 52px);
+      align-items: center;
+      padding: clamp(26px, 4vw, 56px);
+    }
+
+    .copy {
+      max-width: 400px;
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(98, 76, 53, 0.1);
+      color: var(--muted);
+      font-size: 0.82rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(215, 166, 35, 0.14);
+    }
+
+    h1 {
+      margin: 0;
+      font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+      font-size: clamp(2.8rem, 5vw, 5.2rem);
+      line-height: 0.96;
+      letter-spacing: -0.045em;
+      font-weight: 600;
+      text-wrap: balance;
+    }
+
+    h1 .accent {
+      color: var(--accent-deep);
+      font-style: italic;
+    }
+
+    p {
+      margin: 20px 0 0;
+      max-width: 34ch;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.6vw, 1.15rem);
+      line-height: 1.7;
+    }
+
+    .scene-wrap {
+      position: relative;
+      min-height: 360px;
+    }
+
+    .scene-wrap::after {
+      content: "";
+      position: absolute;
+      inset: auto 10% 5% 10%;
+      height: 24px;
+      border-radius: 999px;
+      background: rgba(83, 58, 31, 0.1);
+      filter: blur(10px);
+      z-index: 0;
     }
 
     .scene {
       width: 100%;
       display: block;
-      filter: drop-shadow(0 18px 24px rgba(108, 63, 23, 0.14));
+      position: relative;
+      z-index: 1;
     }
 
-    h1 {
-      margin: 24px 0 0;
-      text-align: center;
-      font-size: clamp(2rem, 4vw, 3.8rem);
-      line-height: 1.05;
-      letter-spacing: -0.05em;
-      text-transform: lowercase;
+    .crane-arm {
+      transform-origin: 700px 152px;
+      animation: arm-sway 7s ease-in-out infinite;
     }
 
-    .highlight {
-      color: var(--accent);
+    .crane-hook {
+      transform-origin: 724px 198px;
+      animation: hook-sway 5s ease-in-out infinite;
     }
 
-    .cloud-one {
-      animation: drift 11s ease-in-out infinite;
+    .leaf-left,
+    .leaf-right {
+      transform-origin: center bottom;
+      animation: leaf-drift 6s ease-in-out infinite;
     }
 
-    .cloud-two {
-      animation: drift 13s ease-in-out infinite reverse;
+    .leaf-right {
+      animation-delay: 1s;
     }
 
-    .hook {
-      transform-origin: 682px 168px;
-      animation: sway 4.8s ease-in-out infinite;
-    }
-
-    .flowers circle:nth-child(odd) {
-      animation: bloom 3.6s ease-in-out infinite;
-    }
-
-    .flowers circle:nth-child(even) {
-      animation: bloom 4.2s ease-in-out infinite reverse;
-    }
-
-    @keyframes sway {
+    @keyframes arm-sway {
       0%, 100% {
-        transform: rotate(3deg);
+        transform: rotate(0deg);
       }
       50% {
-        transform: rotate(-3deg);
+        transform: rotate(-1.4deg);
       }
     }
 
-    @keyframes drift {
+    @keyframes hook-sway {
       0%, 100% {
-        transform: translateX(0);
+        transform: rotate(2deg);
       }
       50% {
-        transform: translateX(10px);
+        transform: rotate(-2deg);
       }
     }
 
-    @keyframes bloom {
+    @keyframes leaf-drift {
       0%, 100% {
-        transform: translateY(0);
+        transform: rotate(0deg);
       }
       50% {
-        transform: translateY(-2px);
+        transform: rotate(4deg);
       }
     }
 
-    @media (max-width: 700px) {
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .copy {
+        max-width: none;
+      }
+
+      .scene-wrap {
+        min-height: 0;
+      }
+    }
+
+    @media (max-width: 640px) {
       body {
         padding: 14px;
       }
 
-      main {
-        border-radius: 24px;
-        padding: 16px;
+      .shell {
+        border-radius: 26px;
       }
 
-      h1 {
-        margin-top: 18px;
+      .layout {
+        padding: 20px;
+        gap: 18px;
+      }
+
+      .eyebrow {
+        font-size: 0.75rem;
+        letter-spacing: 0.16em;
       }
     }
   </style>
 </head>
 <body>
-  <main>
-    <svg class="scene" viewBox="0 0 920 560" role="img" aria-label="Żółty dźwig stoi nad ładnym domkiem z ogródkiem.">
-      <defs>
-        <linearGradient id="skyGradient" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#fff4d7" />
-          <stop offset="100%" stop-color="#ffd9aa" />
-        </linearGradient>
-        <linearGradient id="glassGradient" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#d7f0fb" />
-          <stop offset="100%" stop-color="#99d2eb" />
-        </linearGradient>
-        <linearGradient id="roofGradient" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#dd7a44" />
-          <stop offset="100%" stop-color="#b64b23" />
-        </linearGradient>
-      </defs>
+  <main class="shell">
+    <section class="layout">
+      <div class="copy">
+        <div class="eyebrow">Dom Rybna</div>
+        <h1>strona w budowie,<br><span class="accent">zaraz wracamy</span></h1>
+        <p>
+          Przygotowujemy spokojniejszą, dopracowaną odsłonę serwisu. W międzyczasie
+          żółty dźwig czuwa nad domem i ogrodem.
+        </p>
+      </div>
 
-      <rect x="0" y="0" width="920" height="560" rx="28" fill="url(#skyGradient)" />
-      <circle cx="758" cy="98" r="44" fill="var(--sun)" opacity="0.95" />
-      <circle cx="736" cy="84" r="10" fill="#fff4c4" opacity="0.8" />
+      <div class="scene-wrap">
+        <svg class="scene" viewBox="0 0 720 520" role="img" aria-label="Elegancka ilustracja żółtego dźwigu stojącego nad domkiem z ogródkiem.">
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#fbf6ee" />
+              <stop offset="100%" stop-color="#efe3d3" />
+            </linearGradient>
+            <linearGradient id="houseWall" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#fcf8f1" />
+              <stop offset="100%" stop-color="#efe3d5" />
+            </linearGradient>
+            <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#e7eff0" />
+              <stop offset="100%" stop-color="#cbdadc" />
+            </linearGradient>
+          </defs>
 
-      <g class="cloud-one" fill="#fffaf0" opacity="0.92">
-        <circle cx="198" cy="118" r="24" />
-        <circle cx="227" cy="106" r="30" />
-        <circle cx="264" cy="118" r="22" />
-        <rect x="194" y="118" width="90" height="24" rx="12" />
-      </g>
+          <rect x="26" y="32" width="668" height="452" rx="36" fill="url(#sky)" />
+          <circle cx="570" cy="104" r="38" fill="#f0d496" opacity="0.55" />
 
-      <g class="cloud-two" fill="#fffaf0" opacity="0.85">
-        <circle cx="598" cy="88" r="18" />
-        <circle cx="621" cy="78" r="23" />
-        <circle cx="648" cy="89" r="17" />
-        <rect x="595" y="88" width="62" height="18" rx="9" />
-      </g>
+          <path d="M58 400C140 364 220 358 302 381C394 408 474 412 564 382C611 367 648 364 692 378V444H58Z" fill="#b5c2ab" />
+          <path d="M58 422C132 398 209 398 293 416C391 438 481 439 571 415C620 402 655 402 692 412V462H58Z" fill="#95a786" />
 
-      <path d="M0 382C105 336 192 342 306 375C406 403 523 406 612 374C711 338 818 339 920 383V560H0Z" fill="#89bd59" />
-      <path d="M0 430C122 394 215 399 316 426C418 453 531 455 636 426C748 396 835 401 920 438V560H0Z" fill="#6ea345" />
+          <ellipse cx="420" cy="423" rx="184" ry="26" fill="rgba(56, 40, 27, 0.08)" />
 
-      <ellipse cx="456" cy="456" rx="224" ry="40" fill="rgba(95, 52, 16, 0.10)" />
+          <g>
+            <path d="M266 247L407 152L545 247V258H266Z" fill="var(--roof)" />
+            <rect x="288" y="246" width="236" height="152" rx="16" fill="url(#houseWall)" />
+            <path d="M378 173L409 149L442 173V226H378Z" fill="#a3614c" />
+            <rect x="309" y="269" width="70" height="86" rx="12" fill="url(#glass)" stroke="rgba(88, 102, 104, 0.35)" stroke-width="3" />
+            <line x1="344" y1="269" x2="344" y2="355" stroke="rgba(88, 102, 104, 0.35)" stroke-width="3" />
+            <line x1="309" y1="312" x2="379" y2="312" stroke="rgba(88, 102, 104, 0.35)" stroke-width="3" />
 
-      <path d="M451 560C394 540 393 505 425 488C455 472 498 471 530 488C565 507 562 543 507 560Z" fill="var(--path)" opacity="0.92" />
+            <rect x="433" y="269" width="70" height="86" rx="12" fill="url(#glass)" stroke="rgba(88, 102, 104, 0.35)" stroke-width="3" />
+            <line x1="468" y1="269" x2="468" y2="355" stroke="rgba(88, 102, 104, 0.35)" stroke-width="3" />
+            <line x1="433" y1="312" x2="503" y2="312" stroke="rgba(88, 102, 104, 0.35)" stroke-width="3" />
 
-      <g>
-        <rect x="305" y="234" width="285" height="178" rx="14" fill="var(--wall)" />
-        <path d="M284 259L447 142L612 259V276H284Z" fill="url(#roofGradient)" />
-        <path d="M402 156L447 122L494 156V232H402Z" fill="url(#roofGradient)" />
-        <rect x="320" y="251" width="255" height="145" rx="10" fill="#fff7eb" stroke="rgba(158, 81, 45, 0.18)" stroke-width="3" />
+            <rect x="390" y="304" width="41" height="94" rx="14" fill="#a97058" />
+            <circle cx="421" cy="349" r="4" fill="#f4e3c7" />
+            <rect x="278" y="392" width="256" height="16" rx="8" fill="var(--stone)" />
+          </g>
 
-        <rect x="356" y="282" width="62" height="68" rx="10" fill="url(#glassGradient)" stroke="#7cb4ca" stroke-width="4" />
-        <line x1="387" y1="282" x2="387" y2="350" stroke="#7cb4ca" stroke-width="4" />
-        <line x1="356" y1="316" x2="418" y2="316" stroke="#7cb4ca" stroke-width="4" />
+          <g>
+            <path class="leaf-left" d="M222 392C205 356 214 331 248 316C267 342 267 369 247 397Z" fill="#6f8466" />
+            <path class="leaf-left" d="M248 404C229 373 233 347 265 332C286 356 286 382 271 408Z" fill="#88a07e" />
+            <path class="leaf-right" d="M560 399C577 363 570 338 536 321C516 347 515 373 534 402Z" fill="#6f8466" />
+            <path class="leaf-right" d="M534 409C553 379 550 351 518 336C497 360 497 387 511 413Z" fill="#88a07e" />
+          </g>
 
-        <rect x="478" y="282" width="62" height="68" rx="10" fill="url(#glassGradient)" stroke="#7cb4ca" stroke-width="4" />
-        <line x1="509" y1="282" x2="509" y2="350" stroke="#7cb4ca" stroke-width="4" />
-        <line x1="478" y1="316" x2="540" y2="316" stroke="#7cb4ca" stroke-width="4" />
+          <g>
+            <path d="M347 425C378 409 431 408 464 425C442 438 368 438 347 425Z" fill="#ddcfb7" />
+            <line x1="408" y1="411" x2="408" y2="435" stroke="rgba(102, 79, 55, 0.16)" stroke-width="2" />
+          </g>
 
-        <rect x="425" y="302" width="47" height="94" rx="16" fill="#b36a43" />
-        <circle cx="461" cy="350" r="4" fill="#f8ddb0" />
-        <rect x="432" y="344" width="13" height="30" rx="6" fill="rgba(93, 52, 18, 0.14)" />
+          <g>
+            <rect x="570" y="120" width="18" height="276" rx="9" fill="var(--accent)" />
+            <g stroke="var(--accent-deep)" stroke-width="4" stroke-linecap="round">
+              <line x1="570" y1="152" x2="588" y2="170" />
+              <line x1="570" y1="190" x2="588" y2="208" />
+              <line x1="570" y1="228" x2="588" y2="246" />
+              <line x1="570" y1="266" x2="588" y2="284" />
+              <line x1="570" y1="304" x2="588" y2="322" />
+              <line x1="570" y1="342" x2="588" y2="360" />
+            </g>
 
-        <rect x="296" y="390" width="301" height="16" rx="8" fill="#d7bb90" />
-        <rect x="414" y="191" width="66" height="36" rx="8" fill="url(#glassGradient)" stroke="#7cb4ca" stroke-width="4" />
-        <line x1="447" y1="191" x2="447" y2="227" stroke="#7cb4ca" stroke-width="4" />
-        <line x1="414" y1="209" x2="480" y2="209" stroke="#7cb4ca" stroke-width="4" />
-      </g>
+            <g class="crane-arm">
+              <rect x="588" y="138" width="112" height="16" rx="8" fill="var(--accent)" />
+              <line x1="606" y1="138" x2="632" y2="154" stroke="var(--accent-deep)" stroke-width="4" stroke-linecap="round" />
+              <line x1="640" y1="138" x2="666" y2="154" stroke="var(--accent-deep)" stroke-width="4" stroke-linecap="round" />
+              <line x1="674" y1="138" x2="700" y2="154" stroke="var(--accent-deep)" stroke-width="4" stroke-linecap="round" />
 
-      <g>
-        <rect x="238" y="374" width="52" height="24" rx="12" fill="#5b7f36" />
-        <rect x="628" y="374" width="58" height="26" rx="13" fill="#5b7f36" />
-        <circle cx="254" cy="372" r="26" fill="#6da441" />
-        <circle cx="279" cy="370" r="22" fill="#79b14a" />
-        <circle cx="643" cy="372" r="28" fill="#6da441" />
-        <circle cx="670" cy="369" r="21" fill="#79b14a" />
-      </g>
+              <g class="crane-hook">
+                <line x1="662" y1="154" x2="662" y2="256" stroke="#8a6716" stroke-width="4" />
+                <path d="M662 256C662 270 653 280 643 280C634 280 627 274 627 266C627 258 633 251 642 251" fill="none" stroke="#8a6716" stroke-width="7" stroke-linecap="round" />
+                <rect x="643" y="214" width="38" height="22" rx="8" fill="#e2c78d" />
+              </g>
+            </g>
+          </g>
 
-      <g class="flowers">
-        <rect x="306" y="403" width="286" height="7" rx="4" fill="#6f9d43" />
-
-        <line x1="330" y1="404" x2="330" y2="382" stroke="#5d8c33" stroke-width="4" />
-        <circle cx="330" cy="380" r="8" fill="var(--flower-a)" />
-
-        <line x1="360" y1="404" x2="360" y2="376" stroke="#5d8c33" stroke-width="4" />
-        <circle cx="360" cy="374" r="9" fill="var(--flower-b)" />
-
-        <line x1="390" y1="404" x2="390" y2="384" stroke="#5d8c33" stroke-width="4" />
-        <circle cx="390" cy="382" r="7" fill="var(--flower-c)" />
-
-        <line x1="520" y1="404" x2="520" y2="381" stroke="#5d8c33" stroke-width="4" />
-        <circle cx="520" cy="379" r="8" fill="var(--flower-d)" />
-
-        <line x1="552" y1="404" x2="552" y2="375" stroke="#5d8c33" stroke-width="4" />
-        <circle cx="552" cy="373" r="9" fill="var(--flower-a)" />
-
-        <line x1="580" y1="404" x2="580" y2="384" stroke="#5d8c33" stroke-width="4" />
-        <circle cx="580" cy="382" r="7" fill="var(--flower-b)" />
-      </g>
-
-      <g>
-        <rect x="640" y="112" width="24" height="282" rx="8" fill="var(--crane)" />
-        <rect x="664" y="132" width="126" height="18" rx="8" fill="var(--crane)" />
-        <rect x="720" y="150" width="18" height="22" rx="6" fill="var(--crane)" />
-        <rect x="628" y="394" width="48" height="18" rx="9" fill="var(--crane-dark)" />
-
-        <g stroke="var(--crane-dark)" stroke-width="6" stroke-linecap="round">
-          <line x1="640" y1="140" x2="664" y2="162" />
-          <line x1="640" y1="176" x2="664" y2="198" />
-          <line x1="640" y1="212" x2="664" y2="234" />
-          <line x1="640" y1="248" x2="664" y2="270" />
-          <line x1="640" y1="284" x2="664" y2="306" />
-          <line x1="640" y1="320" x2="664" y2="342" />
-          <line x1="640" y1="356" x2="664" y2="378" />
-
-          <line x1="680" y1="132" x2="712" y2="150" />
-          <line x1="718" y1="132" x2="750" y2="150" />
-          <line x1="756" y1="132" x2="788" y2="150" />
-        </g>
-
-        <g class="hook">
-          <line x1="728" y1="168" x2="728" y2="280" stroke="#7a5d13" stroke-width="5" />
-          <path d="M728 280C728 295 717 305 705 305C694 305 688 298 688 290C688 281 694 275 703 275" fill="none" stroke="#7a5d13" stroke-width="8" stroke-linecap="round" />
-          <rect x="706" y="238" width="44" height="24" rx="8" fill="#d96e40" />
-          <rect x="713" y="228" width="30" height="12" rx="6" fill="#f8ddb0" />
-        </g>
-      </g>
-
-      <g opacity="0.65">
-        <path d="M176 440C178 421 192 412 212 411C228 410 241 417 247 430C261 427 273 430 281 441Z" fill="#b2d473" />
-        <path d="M695 438C699 421 712 413 731 412C748 411 760 418 767 430C781 427 794 430 802 441Z" fill="#b2d473" />
-      </g>
-    </svg>
-
-    <h1>strona w budowie, <span class="highlight">zaraz wracamy</span></h1>
+          <g opacity="0.45" stroke="var(--line)" stroke-width="2">
+            <line x1="122" y1="142" x2="176" y2="142" />
+            <line x1="140" y1="124" x2="194" y2="124" />
+          </g>
+        </svg>
+      </div>
+    </section>
   </main>
 </body>
 </html>
