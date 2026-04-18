@@ -1,1 +1,277 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strona w budowie</title>
+  <style>
+    :root {
+      --sky-top: #fff6dc;
+      --sky-bottom: #ffd8a8;
+      --sun: #ffcd5b;
+      --card: rgba(255, 250, 240, 0.78);
+      --card-border: rgba(173, 112, 31, 0.16);
+      --shadow: rgba(95, 52, 16, 0.16);
+      --headline: #5c2f12;
+      --accent: #d7862f;
+      --grass-dark: #5b8d38;
+      --grass-light: #81b84e;
+      --roof: #c85f32;
+      --wall: #fff5e6;
+      --trim: #9e512d;
+      --window: #a8dbf5;
+      --path: #d9c4a6;
+      --crane: #f7c52e;
+      --crane-dark: #bf9311;
+      --flower-a: #f17070;
+      --flower-b: #ffb84d;
+      --flower-c: #8d7cf6;
+      --flower-d: #ffffff;
+    }
 
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background:
+        radial-gradient(circle at top, rgba(255, 255, 255, 0.7) 0, rgba(255, 255, 255, 0) 38%),
+        linear-gradient(180deg, var(--sky-top) 0%, #ffe7c4 42%, #ffc98d 100%);
+      font-family: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif;
+      color: var(--headline);
+    }
+
+    main {
+      width: min(100%, 980px);
+      padding: clamp(20px, 4vw, 34px);
+      border: 1px solid var(--card-border);
+      border-radius: 32px;
+      background: var(--card);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 24px 70px var(--shadow);
+    }
+
+    .scene {
+      width: 100%;
+      display: block;
+      filter: drop-shadow(0 18px 24px rgba(108, 63, 23, 0.14));
+    }
+
+    h1 {
+      margin: 24px 0 0;
+      text-align: center;
+      font-size: clamp(2rem, 4vw, 3.8rem);
+      line-height: 1.05;
+      letter-spacing: -0.05em;
+      text-transform: lowercase;
+    }
+
+    .highlight {
+      color: var(--accent);
+    }
+
+    .cloud-one {
+      animation: drift 11s ease-in-out infinite;
+    }
+
+    .cloud-two {
+      animation: drift 13s ease-in-out infinite reverse;
+    }
+
+    .hook {
+      transform-origin: 682px 168px;
+      animation: sway 4.8s ease-in-out infinite;
+    }
+
+    .flowers circle:nth-child(odd) {
+      animation: bloom 3.6s ease-in-out infinite;
+    }
+
+    .flowers circle:nth-child(even) {
+      animation: bloom 4.2s ease-in-out infinite reverse;
+    }
+
+    @keyframes sway {
+      0%, 100% {
+        transform: rotate(3deg);
+      }
+      50% {
+        transform: rotate(-3deg);
+      }
+    }
+
+    @keyframes drift {
+      0%, 100% {
+        transform: translateX(0);
+      }
+      50% {
+        transform: translateX(10px);
+      }
+    }
+
+    @keyframes bloom {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-2px);
+      }
+    }
+
+    @media (max-width: 700px) {
+      body {
+        padding: 14px;
+      }
+
+      main {
+        border-radius: 24px;
+        padding: 16px;
+      }
+
+      h1 {
+        margin-top: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <svg class="scene" viewBox="0 0 920 560" role="img" aria-label="Żółty dźwig stoi nad ładnym domkiem z ogródkiem.">
+      <defs>
+        <linearGradient id="skyGradient" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#fff4d7" />
+          <stop offset="100%" stop-color="#ffd9aa" />
+        </linearGradient>
+        <linearGradient id="glassGradient" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#d7f0fb" />
+          <stop offset="100%" stop-color="#99d2eb" />
+        </linearGradient>
+        <linearGradient id="roofGradient" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#dd7a44" />
+          <stop offset="100%" stop-color="#b64b23" />
+        </linearGradient>
+      </defs>
+
+      <rect x="0" y="0" width="920" height="560" rx="28" fill="url(#skyGradient)" />
+      <circle cx="758" cy="98" r="44" fill="var(--sun)" opacity="0.95" />
+      <circle cx="736" cy="84" r="10" fill="#fff4c4" opacity="0.8" />
+
+      <g class="cloud-one" fill="#fffaf0" opacity="0.92">
+        <circle cx="198" cy="118" r="24" />
+        <circle cx="227" cy="106" r="30" />
+        <circle cx="264" cy="118" r="22" />
+        <rect x="194" y="118" width="90" height="24" rx="12" />
+      </g>
+
+      <g class="cloud-two" fill="#fffaf0" opacity="0.85">
+        <circle cx="598" cy="88" r="18" />
+        <circle cx="621" cy="78" r="23" />
+        <circle cx="648" cy="89" r="17" />
+        <rect x="595" y="88" width="62" height="18" rx="9" />
+      </g>
+
+      <path d="M0 382C105 336 192 342 306 375C406 403 523 406 612 374C711 338 818 339 920 383V560H0Z" fill="#89bd59" />
+      <path d="M0 430C122 394 215 399 316 426C418 453 531 455 636 426C748 396 835 401 920 438V560H0Z" fill="#6ea345" />
+
+      <ellipse cx="456" cy="456" rx="224" ry="40" fill="rgba(95, 52, 16, 0.10)" />
+
+      <path d="M451 560C394 540 393 505 425 488C455 472 498 471 530 488C565 507 562 543 507 560Z" fill="var(--path)" opacity="0.92" />
+
+      <g>
+        <rect x="305" y="234" width="285" height="178" rx="14" fill="var(--wall)" />
+        <path d="M284 259L447 142L612 259V276H284Z" fill="url(#roofGradient)" />
+        <path d="M402 156L447 122L494 156V232H402Z" fill="url(#roofGradient)" />
+        <rect x="320" y="251" width="255" height="145" rx="10" fill="#fff7eb" stroke="rgba(158, 81, 45, 0.18)" stroke-width="3" />
+
+        <rect x="356" y="282" width="62" height="68" rx="10" fill="url(#glassGradient)" stroke="#7cb4ca" stroke-width="4" />
+        <line x1="387" y1="282" x2="387" y2="350" stroke="#7cb4ca" stroke-width="4" />
+        <line x1="356" y1="316" x2="418" y2="316" stroke="#7cb4ca" stroke-width="4" />
+
+        <rect x="478" y="282" width="62" height="68" rx="10" fill="url(#glassGradient)" stroke="#7cb4ca" stroke-width="4" />
+        <line x1="509" y1="282" x2="509" y2="350" stroke="#7cb4ca" stroke-width="4" />
+        <line x1="478" y1="316" x2="540" y2="316" stroke="#7cb4ca" stroke-width="4" />
+
+        <rect x="425" y="302" width="47" height="94" rx="16" fill="#b36a43" />
+        <circle cx="461" cy="350" r="4" fill="#f8ddb0" />
+        <rect x="432" y="344" width="13" height="30" rx="6" fill="rgba(93, 52, 18, 0.14)" />
+
+        <rect x="296" y="390" width="301" height="16" rx="8" fill="#d7bb90" />
+        <rect x="414" y="191" width="66" height="36" rx="8" fill="url(#glassGradient)" stroke="#7cb4ca" stroke-width="4" />
+        <line x1="447" y1="191" x2="447" y2="227" stroke="#7cb4ca" stroke-width="4" />
+        <line x1="414" y1="209" x2="480" y2="209" stroke="#7cb4ca" stroke-width="4" />
+      </g>
+
+      <g>
+        <rect x="238" y="374" width="52" height="24" rx="12" fill="#5b7f36" />
+        <rect x="628" y="374" width="58" height="26" rx="13" fill="#5b7f36" />
+        <circle cx="254" cy="372" r="26" fill="#6da441" />
+        <circle cx="279" cy="370" r="22" fill="#79b14a" />
+        <circle cx="643" cy="372" r="28" fill="#6da441" />
+        <circle cx="670" cy="369" r="21" fill="#79b14a" />
+      </g>
+
+      <g class="flowers">
+        <rect x="306" y="403" width="286" height="7" rx="4" fill="#6f9d43" />
+
+        <line x1="330" y1="404" x2="330" y2="382" stroke="#5d8c33" stroke-width="4" />
+        <circle cx="330" cy="380" r="8" fill="var(--flower-a)" />
+
+        <line x1="360" y1="404" x2="360" y2="376" stroke="#5d8c33" stroke-width="4" />
+        <circle cx="360" cy="374" r="9" fill="var(--flower-b)" />
+
+        <line x1="390" y1="404" x2="390" y2="384" stroke="#5d8c33" stroke-width="4" />
+        <circle cx="390" cy="382" r="7" fill="var(--flower-c)" />
+
+        <line x1="520" y1="404" x2="520" y2="381" stroke="#5d8c33" stroke-width="4" />
+        <circle cx="520" cy="379" r="8" fill="var(--flower-d)" />
+
+        <line x1="552" y1="404" x2="552" y2="375" stroke="#5d8c33" stroke-width="4" />
+        <circle cx="552" cy="373" r="9" fill="var(--flower-a)" />
+
+        <line x1="580" y1="404" x2="580" y2="384" stroke="#5d8c33" stroke-width="4" />
+        <circle cx="580" cy="382" r="7" fill="var(--flower-b)" />
+      </g>
+
+      <g>
+        <rect x="640" y="112" width="24" height="282" rx="8" fill="var(--crane)" />
+        <rect x="664" y="132" width="126" height="18" rx="8" fill="var(--crane)" />
+        <rect x="720" y="150" width="18" height="22" rx="6" fill="var(--crane)" />
+        <rect x="628" y="394" width="48" height="18" rx="9" fill="var(--crane-dark)" />
+
+        <g stroke="var(--crane-dark)" stroke-width="6" stroke-linecap="round">
+          <line x1="640" y1="140" x2="664" y2="162" />
+          <line x1="640" y1="176" x2="664" y2="198" />
+          <line x1="640" y1="212" x2="664" y2="234" />
+          <line x1="640" y1="248" x2="664" y2="270" />
+          <line x1="640" y1="284" x2="664" y2="306" />
+          <line x1="640" y1="320" x2="664" y2="342" />
+          <line x1="640" y1="356" x2="664" y2="378" />
+
+          <line x1="680" y1="132" x2="712" y2="150" />
+          <line x1="718" y1="132" x2="750" y2="150" />
+          <line x1="756" y1="132" x2="788" y2="150" />
+        </g>
+
+        <g class="hook">
+          <line x1="728" y1="168" x2="728" y2="280" stroke="#7a5d13" stroke-width="5" />
+          <path d="M728 280C728 295 717 305 705 305C694 305 688 298 688 290C688 281 694 275 703 275" fill="none" stroke="#7a5d13" stroke-width="8" stroke-linecap="round" />
+          <rect x="706" y="238" width="44" height="24" rx="8" fill="#d96e40" />
+          <rect x="713" y="228" width="30" height="12" rx="6" fill="#f8ddb0" />
+        </g>
+      </g>
+
+      <g opacity="0.65">
+        <path d="M176 440C178 421 192 412 212 411C228 410 241 417 247 430C261 427 273 430 281 441Z" fill="#b2d473" />
+        <path d="M695 438C699 421 712 413 731 412C748 411 760 418 767 430C781 427 794 430 802 441Z" fill="#b2d473" />
+      </g>
+    </svg>
+
+    <h1>strona w budowie, <span class="highlight">zaraz wracamy</span></h1>
+  </main>
+</body>
+</html>
