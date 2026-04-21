@@ -766,8 +766,17 @@
       margin-top: 24px;
     }
 
+    .near-list li {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(150px, 1.45fr);
+      align-items: start;
+      gap: 12px;
+    }
+
     .near-list li strong {
-      white-space: nowrap;
+      min-width: 0;
+      white-space: normal;
+      overflow-wrap: anywhere;
     }
 
     .cta-band {
@@ -792,6 +801,12 @@
       max-width: 62ch;
       margin-top: 14px;
       color: rgba(255, 255, 255, 0.76);
+    }
+
+    .cta-actions {
+      display: grid;
+      gap: 10px;
+      min-width: 240px;
     }
 
     .contact-grid {
@@ -1051,7 +1066,7 @@
         <a href="#galeria">Galeria</a>
         <a href="#uklad">Układ</a>
         <a href="#lokalizacja">Lokalizacja</a>
-        <a class="button button-primary" href="tel:+48510297341">510 297 341</a>
+        <a class="button button-primary" href="tel:+48666605649">666 605 649</a>
       </div>
     </nav>
   </header>
@@ -1071,7 +1086,7 @@
             dla rodziny, pracy zdalnej i codziennego życia blisko natury.
           </p>
           <div class="hero-actions">
-            <a class="button button-primary" href="tel:+48510297341">Umów prezentację</a>
+            <a class="button button-primary" href="tel:+48666605649">Umów prezentację</a>
             <a class="button button-secondary" href="#galeria">Zobacz galerię</a>
           </div>
         </div>
@@ -1127,7 +1142,7 @@
           <article class="feature">
             <div class="feature-mark">4</div>
             <h3>Garaż i miejsca postojowe</h3>
-            <p>Garaż w bryle budynku, siła w garażu oraz dwa dodatkowe miejsca przed domem.</p>
+            <p>Garaż w bryle budynku, siła w garażu oraz na piętrze, a także dwa dodatkowe miejsca przed domem.</p>
           </article>
           <article class="feature">
             <div class="feature-mark">5</div>
@@ -1432,7 +1447,10 @@
               ogród oraz dojazd do Rybnej.
             </p>
           </div>
-          <a class="button button-primary" href="tel:+48510297341">Zadzwoń: 510 297 341</a>
+          <div class="cta-actions">
+            <a class="button button-primary" href="tel:+48666605649">Zadzwoń: 666 605 649</a>
+            <a class="button button-primary" href="mailto:ola@dom-rybna.online">ola@dom-rybna.online</a>
+          </div>
         </div>
 
         <div class="contact-grid">
