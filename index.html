@@ -3,327 +3,1306 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Strona w budowie</title>
+  <meta name="description" content="Dom na sprzedaż w Rybnej przy ul. Różanej 14. 129,10 m², 5 pokoi, działka 507 m², ogród, garaż i spokojna lokalizacja blisko Krakowa.">
+  <meta name="theme-color" content="#263b31">
+  <meta property="og:title" content="Dom na sprzedaż - Rybna, ul. Różana 14">
+  <meta property="og:description" content="Gotowy do zamieszkania dom z ogrodem, garażem i światłowodem w zielonej części gminy Czernichów.">
+  <meta property="og:type" content="website">
+  <title>Dom na sprzedaż - Rybna, Różana 14</title>
   <style>
     :root {
-      --canvas: #f6f0e6;
-      --canvas-deep: #eadfcc;
-      --panel: rgba(255, 252, 247, 0.78);
-      --panel-border: rgba(98, 76, 53, 0.12);
-      --ink: #38281b;
-      --muted: #78624c;
-      --accent: #d7a623;
-      --accent-deep: #b38312;
-      --sage: #7f9575;
-      --sage-deep: #5d7255;
-      --roof: #8d503d;
-      --stone: #d8c9b4;
-      --window: #d7e5e6;
-      --line: rgba(63, 47, 32, 0.25);
-      --shadow: rgba(53, 37, 19, 0.16);
+      --ink: #17201b;
+      --muted: #59665f;
+      --paper: #fbfbf8;
+      --soft: #eef2ed;
+      --mist: #e3e9e3;
+      --line: rgba(23, 32, 27, 0.14);
+      --forest: #263b31;
+      --forest-2: #345443;
+      --leaf: #7a9a72;
+      --clay: #a7603e;
+      --gold: #c79643;
+      --white: #ffffff;
+      --shadow: rgba(20, 34, 28, 0.18);
+      --max: 1180px;
+      --radius: 8px;
     }
 
     * {
       box-sizing: border-box;
     }
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 24px;
-      color: var(--ink);
-      background:
-        radial-gradient(circle at top, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 34%),
-        linear-gradient(180deg, var(--canvas) 0%, #efe4d2 54%, var(--canvas-deep) 100%);
-      font-family: "Avenir Next", "Segoe UI", sans-serif;
+    html {
+      scroll-behavior: smooth;
     }
 
-    .shell {
-      width: min(100%, 1080px);
-      border-radius: 36px;
-      border: 1px solid var(--panel-border);
-      background: var(--panel);
-      box-shadow: 0 28px 80px var(--shadow);
-      backdrop-filter: blur(14px);
-      overflow: hidden;
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+      line-height: 1.5;
+      letter-spacing: 0;
+    }
+
+    img,
+    iframe {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .topbar {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 20;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(23, 32, 27, 0.82);
+      color: var(--white);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav {
+      width: min(100% - 32px, var(--max));
+      min-height: 68px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+    }
+
+    .brand {
+      display: grid;
+      gap: 1px;
+      font-weight: 750;
+      line-height: 1.1;
+    }
+
+    .brand span {
+      display: block;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 0.82rem;
+      font-weight: 500;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: clamp(12px, 2vw, 26px);
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 0.94rem;
+    }
+
+    .nav-links a {
+      padding: 10px 0;
+    }
+
+    .nav-links a:hover {
+      color: var(--white);
+    }
+
+    .button {
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 18px;
+      border: 1px solid transparent;
+      border-radius: var(--radius);
+      font-weight: 750;
+      line-height: 1;
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .button-primary {
+      background: var(--gold);
+      color: #16130c;
+      box-shadow: 0 12px 28px rgba(199, 150, 67, 0.28);
+    }
+
+    .button-secondary {
+      border-color: rgba(255, 255, 255, 0.55);
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .button-dark {
+      background: var(--forest);
+      color: var(--white);
+      box-shadow: 0 12px 28px rgba(38, 59, 49, 0.18);
+    }
+
+    .hero {
+      min-height: 100vh;
       position: relative;
+      display: grid;
+      align-items: end;
+      overflow: hidden;
+      color: var(--white);
       isolation: isolate;
     }
 
-    .shell::before {
+    .hero::before {
       content: "";
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at 16% 14%, rgba(255, 255, 255, 0.5), transparent 28%),
-        radial-gradient(circle at 84% 12%, rgba(215, 166, 35, 0.16), transparent 24%);
+        linear-gradient(90deg, rgba(9, 17, 13, 0.78) 0%, rgba(9, 17, 13, 0.52) 39%, rgba(9, 17, 13, 0.18) 74%),
+        linear-gradient(0deg, rgba(9, 17, 13, 0.6), rgba(9, 17, 13, 0.04) 45%);
       z-index: -1;
     }
 
-    .layout {
-      display: grid;
-      grid-template-columns: minmax(280px, 1fr) minmax(360px, 1.2fr);
-      gap: clamp(24px, 4vw, 52px);
-      align-items: center;
-      padding: clamp(26px, 4vw, 56px);
+    .hero-photo {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      min-height: 100%;
+      border-radius: 0;
+      background: var(--forest);
     }
 
-    .copy {
-      max-width: 400px;
+    .hero-photo img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
-    .eyebrow {
-      margin: 0 0 18px;
+    .hero-inner {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+      padding: 118px 0 44px;
+    }
+
+    .hero-copy {
+      max-width: 760px;
+      padding-bottom: clamp(28px, 6vw, 72px);
+      text-shadow: 0 2px 18px rgba(0, 0, 0, 0.28);
+    }
+
+    .kicker {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      padding: 9px 14px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.7);
-      border: 1px solid rgba(98, 76, 53, 0.1);
-      color: var(--muted);
-      font-size: 0.82rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
+      margin: 0 0 18px;
+      color: rgba(255, 255, 255, 0.86);
+      font-weight: 750;
     }
 
-    .eyebrow::before {
+    .kicker::before {
       content: "";
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 0 6px rgba(215, 166, 35, 0.14);
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 0 6px rgba(199, 150, 67, 0.22);
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
     }
 
     h1 {
-      margin: 0;
-      font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
-      font-size: clamp(2.8rem, 5vw, 5.2rem);
-      line-height: 0.96;
-      letter-spacing: -0.045em;
-      font-weight: 600;
+      max-width: 920px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3.2rem, 8vw, 7.4rem);
+      line-height: 0.95;
+      font-weight: 700;
+      text-wrap: balance;
+      letter-spacing: 0;
+    }
+
+    .hero-lead {
+      max-width: 660px;
+      margin-top: 24px;
+      color: rgba(255, 255, 255, 0.88);
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+    }
+
+    .hero-actions {
+      margin-top: 32px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero-facts {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.11);
+      backdrop-filter: blur(18px);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .hero-fact {
+      min-height: 110px;
+      padding: 20px;
+      border-right: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .hero-fact:last-child {
+      border-right: 0;
+    }
+
+    .hero-fact strong {
+      display: block;
+      font-size: clamp(1.45rem, 2.8vw, 2.35rem);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .hero-fact span {
+      display: block;
+      margin-top: 9px;
+      color: rgba(255, 255, 255, 0.76);
+      font-size: 0.94rem;
+    }
+
+    .section {
+      padding: clamp(64px, 9vw, 112px) 0;
+    }
+
+    .section-alt {
+      background: var(--soft);
+    }
+
+    .section-dark {
+      background: var(--forest);
+      color: var(--white);
+    }
+
+    .wrap {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+    }
+
+    .section-head {
+      max-width: 760px;
+      margin-bottom: clamp(30px, 5vw, 54px);
+    }
+
+    .eyebrow {
+      margin-bottom: 12px;
+      color: var(--clay);
+      font-weight: 800;
+    }
+
+    .section-dark .eyebrow {
+      color: #e3bd73;
+    }
+
+    h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.25rem, 5vw, 4.4rem);
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: 0;
       text-wrap: balance;
     }
 
-    h1 .accent {
-      color: var(--accent-deep);
-      font-style: italic;
-    }
-
-    p {
-      margin: 20px 0 0;
-      max-width: 34ch;
+    .section-head p {
+      margin-top: 18px;
       color: var(--muted);
-      font-size: clamp(1rem, 1.6vw, 1.15rem);
-      line-height: 1.7;
+      font-size: 1.08rem;
+      max-width: 66ch;
     }
 
-    .scene-wrap {
+    .section-dark .section-head p,
+    .section-dark .muted {
+      color: rgba(255, 255, 255, 0.74);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .feature {
+      min-height: 176px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--white);
+    }
+
+    .feature-mark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 22px;
+      border-radius: 50%;
+      background: var(--mist);
+      color: var(--forest);
+      font-weight: 900;
+    }
+
+    .feature h3,
+    .detail h3,
+    .contact-card h3,
+    .nearby h3 {
+      margin-bottom: 10px;
+      font-size: 1.15rem;
+      line-height: 1.2;
+    }
+
+    .feature p,
+    .detail p,
+    .contact-card p,
+    .nearby p {
+      color: var(--muted);
+    }
+
+    .gallery-lead {
+      display: grid;
+      grid-template-columns: 1.4fr 0.8fr;
+      gap: 14px;
+      align-items: stretch;
+      margin-bottom: 14px;
+    }
+
+    .photo-slot {
+      margin: 0;
+      min-height: 220px;
       position: relative;
-      min-height: 360px;
+      display: grid;
+      align-items: end;
+      overflow: hidden;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255, 255, 255, 0.46);
+      background:
+        linear-gradient(135deg, rgba(38, 59, 49, 0.18), rgba(167, 96, 62, 0.18)),
+        repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.28) 0 1px, transparent 1px 18px),
+        linear-gradient(135deg, #c8d4ca, #edf1ed 48%, #78917d);
+      color: var(--white);
+      box-shadow: 0 18px 42px rgba(23, 32, 27, 0.11);
+      isolation: isolate;
     }
 
-    .scene-wrap::after {
+    .photo-slot img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 500ms ease;
+      z-index: -1;
+    }
+
+    .photo-slot:hover img {
+      transform: scale(1.035);
+    }
+
+    .photo-slot::before {
       content: "";
       position: absolute;
-      inset: auto 10% 5% 10%;
-      height: 24px;
-      border-radius: 999px;
-      background: rgba(83, 58, 31, 0.1);
-      filter: blur(10px);
-      z-index: 0;
-    }
-
-    .scene {
-      width: 100%;
-      display: block;
-      position: relative;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(10, 18, 14, 0.72), transparent 58%);
       z-index: 1;
     }
 
-    .crane-arm {
-      transform-origin: 700px 152px;
-      animation: arm-sway 7s ease-in-out infinite;
+    .photo-slot span {
+      position: relative;
+      z-index: 2;
+      padding: 18px;
+      font-weight: 800;
+      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.3);
     }
 
-    .crane-hook {
-      transform-origin: 724px 198px;
-      animation: hook-sway 5s ease-in-out infinite;
+    .photo-main {
+      min-height: 520px;
     }
 
-    .leaf-left,
-    .leaf-right {
-      transform-origin: center bottom;
-      animation: leaf-drift 6s ease-in-out infinite;
+    .photo-stack {
+      display: grid;
+      gap: 14px;
     }
 
-    .leaf-right {
-      animation-delay: 1s;
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
     }
 
-    @keyframes arm-sway {
-      0%, 100% {
-        transform: rotate(0deg);
+    .gallery-grid .photo-slot {
+      min-height: 180px;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+      gap: clamp(28px, 6vw, 72px);
+      align-items: start;
+    }
+
+    .intro-copy {
+      position: sticky;
+      top: 98px;
+    }
+
+    .intro-copy p {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .detail {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--white);
+    }
+
+    .detail ul,
+    .spec-list,
+    .near-list,
+    .room-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .detail li,
+    .spec-list li,
+    .near-list li,
+    .room-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 12px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    .detail li:first-child,
+    .spec-list li:first-child,
+    .near-list li:first-child,
+    .room-list li:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .detail li strong,
+    .spec-list li strong,
+    .near-list li strong,
+    .room-list li strong {
+      color: var(--ink);
+      font-weight: 800;
+      text-align: right;
+    }
+
+    .plan-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .plan {
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+    }
+
+    .plan-head {
+      padding: 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    .plan-head strong {
+      display: block;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 2rem;
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .plan-head span {
+      display: block;
+      margin-top: 8px;
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .room-list {
+      padding: 10px 24px 22px;
+    }
+
+    .room-list li {
+      border-color: rgba(255, 255, 255, 0.14);
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .room-list li strong {
+      color: var(--white);
+      min-width: 88px;
+    }
+
+    .specs {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .spec {
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--white);
+    }
+
+    .spec h3 {
+      margin-bottom: 14px;
+      color: var(--forest);
+      font-size: 1.06rem;
+    }
+
+    .lifestyle {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
+      gap: clamp(28px, 5vw, 56px);
+      align-items: center;
+    }
+
+    .lifestyle .photo-slot {
+      min-height: 520px;
+    }
+
+    .lifestyle-copy p {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .pill-list span {
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--white);
+      color: var(--forest);
+      font-weight: 750;
+      font-size: 0.94rem;
+    }
+
+    .map-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.18fr) minmax(320px, 0.82fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .map-shell {
+      min-height: 560px;
+      overflow: hidden;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: var(--white);
+      box-shadow: 0 18px 48px rgba(23, 32, 27, 0.12);
+    }
+
+    .map-shell iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 560px;
+      border: 0;
+    }
+
+    .nearby {
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--white);
+    }
+
+    .near-list {
+      margin-top: 24px;
+    }
+
+    .near-list li strong {
+      white-space: nowrap;
+    }
+
+    .cta-band {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: center;
+      padding: clamp(28px, 5vw, 48px);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(135deg, rgba(38, 59, 49, 0.98), rgba(52, 84, 67, 0.96)),
+        var(--forest);
+      color: var(--white);
+      box-shadow: 0 20px 60px rgba(38, 59, 49, 0.22);
+    }
+
+    .cta-band h2 {
+      font-size: clamp(2rem, 4vw, 3.4rem);
+    }
+
+    .cta-band p {
+      max-width: 62ch;
+      margin-top: 14px;
+      color: rgba(255, 255, 255, 0.76);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .contact-card {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--white);
+    }
+
+    .footer {
+      padding: 32px 0 40px;
+      background: #111914;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.92rem;
+    }
+
+    .footer .wrap {
+      display: flex;
+      justify-content: space-between;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    .footer strong {
+      color: var(--white);
+    }
+
+    @media (max-width: 980px) {
+      .nav {
+        min-height: 62px;
       }
-      50% {
-        transform: rotate(-1.4deg);
-      }
-    }
 
-    @keyframes hook-sway {
-      0%, 100% {
-        transform: rotate(2deg);
+      .nav-links a:not(.button) {
+        display: none;
       }
-      50% {
-        transform: rotate(-2deg);
-      }
-    }
 
-    @keyframes leaf-drift {
-      0%, 100% {
-        transform: rotate(0deg);
+      .hero-facts,
+      .feature-grid,
+      .specs,
+      .contact-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
-      50% {
-        transform: rotate(4deg);
-      }
-    }
 
-    @media (max-width: 900px) {
-      .layout {
+      .hero-fact:nth-child(2) {
+        border-right: 0;
+      }
+
+      .hero-fact:nth-child(1),
+      .hero-fact:nth-child(2) {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+      }
+
+      .split,
+      .lifestyle,
+      .map-layout,
+      .cta-band {
         grid-template-columns: 1fr;
       }
 
-      .copy {
-        max-width: none;
+      .intro-copy {
+        position: static;
       }
 
-      .scene-wrap {
-        min-height: 0;
+      .gallery-lead,
+      .plan-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .photo-main,
+      .lifestyle .photo-slot,
+      .map-shell,
+      .map-shell iframe {
+        min-height: 420px;
       }
     }
 
-    @media (max-width: 640px) {
-      body {
-        padding: 14px;
+    @media (max-width: 680px) {
+      .topbar {
+        position: absolute;
       }
 
-      .shell {
-        border-radius: 26px;
+      .nav {
+        width: min(100% - 24px, var(--max));
       }
 
-      .layout {
-        padding: 20px;
-        gap: 18px;
+      .brand {
+        font-size: 0.98rem;
       }
 
-      .eyebrow {
-        font-size: 0.75rem;
-        letter-spacing: 0.16em;
+      .brand span,
+      .nav-links .button {
+        font-size: 0.82rem;
+      }
+
+      .nav-links .button {
+        min-height: 40px;
+        padding: 10px 12px;
+      }
+
+      .hero {
+        min-height: 900px;
+      }
+
+      .hero-inner,
+      .wrap {
+        width: min(100% - 24px, var(--max));
+      }
+
+      .hero-inner {
+        padding-top: 96px;
+      }
+
+      .hero-copy {
+        padding-bottom: 28px;
+      }
+
+      .hero-actions {
+        align-items: stretch;
+      }
+
+      .hero-actions .button,
+      .cta-band .button {
+        width: 100%;
+      }
+
+      .hero-facts,
+      .feature-grid,
+      .details-grid,
+      .gallery-grid,
+      .specs,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-fact,
+      .hero-fact:nth-child(2) {
+        border-right: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+      }
+
+      .hero-fact:last-child {
+        border-bottom: 0;
+      }
+
+      .photo-main,
+      .photo-slot,
+      .lifestyle .photo-slot,
+      .map-shell,
+      .map-shell iframe {
+        min-height: 300px;
+      }
+
+      .detail li,
+      .spec-list li,
+      .near-list li,
+      .room-list li {
+        display: block;
+      }
+
+      .detail li strong,
+      .spec-list li strong,
+      .near-list li strong,
+      .room-list li strong {
+        display: block;
+        margin-top: 4px;
+        text-align: left;
+      }
+
+      .section {
+        padding: 56px 0;
+      }
+
+      .footer .wrap {
+        display: grid;
       }
     }
   </style>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SingleFamilyResidence",
+      "name": "Dom na sprzedaż w Rybnej",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Różana 14",
+        "addressLocality": "Rybna",
+        "addressRegion": "małopolskie",
+        "addressCountry": "PL"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 50.03840053402806,
+        "longitude": 19.638628070549068
+      },
+      "floorSize": {
+        "@type": "QuantitativeValue",
+        "value": 129.10,
+        "unitCode": "MTK"
+      },
+      "numberOfRooms": 5,
+      "numberOfBathroomsTotal": 2,
+      "yearBuilt": 2011,
+      "offers": {
+        "@type": "Offer",
+        "price": 995000,
+        "priceCurrency": "PLN",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+  </script>
 </head>
 <body>
-  <main class="shell">
-    <section class="layout">
-      <div class="copy">
-        <div class="eyebrow">Dom Rybna</div>
-        <h1>strona w budowie,<br><span class="accent">zaraz wracamy</span></h1>
-        <p>
-          Przygotowujemy spokojniejszą, dopracowaną odsłonę serwisu. W międzyczasie
-          żółty dźwig czuwa nad domem i ogrodem.
-        </p>
+  <header class="topbar">
+    <nav class="nav" aria-label="Główna nawigacja">
+      <a class="brand" href="#top" aria-label="Dom Rybna - początek strony">
+        Dom Rybna
+        <span>Różana 14, gmina Czernichów</span>
+      </a>
+      <div class="nav-links">
+        <a href="#galeria">Galeria</a>
+        <a href="#uklad">Układ</a>
+        <a href="#lokalizacja">Lokalizacja</a>
+        <a class="button button-primary" href="tel:+48510297341">510 297 341</a>
       </div>
+    </nav>
+  </header>
 
-      <div class="scene-wrap">
-        <svg class="scene" viewBox="0 0 720 520" role="img" aria-label="Elegancka ilustracja żółtego dźwigu stojącego nad domkiem z ogródkiem.">
-          <defs>
-            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#fbf6ee" />
-              <stop offset="100%" stop-color="#efe3d3" />
-            </linearGradient>
-            <linearGradient id="houseWall" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#fcf8f1" />
-              <stop offset="100%" stop-color="#efe3d5" />
-            </linearGradient>
-            <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#e7eff0" />
-              <stop offset="100%" stop-color="#cbdadc" />
-            </linearGradient>
-          </defs>
+  <main id="top">
+    <section class="hero" aria-label="Dom na sprzedaż w Rybnej">
+      <div class="hero-photo" aria-hidden="true">
+        <img src="galeria/a7dced9c-4b8d-4002-862c-0cd987831aca.jpg" alt="" fetchpriority="high">
+      </div>
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <p class="kicker">Dom na sprzedaż bez prowizji od kupującego</p>
+          <h1>Gotowy dom z ogrodem w zielonej Rybnej</h1>
+          <p class="hero-lead">
+            Bliźniak o powierzchni 129,10 m² z garażem, południowym tarasem,
+            światłowodem i kameralnym ogrodem. Spokojna lokalizacja pod Krakowem
+            dla rodziny, pracy zdalnej i codziennego życia blisko natury.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="tel:+48510297341">Umów prezentację</a>
+            <a class="button button-secondary" href="#galeria">Zobacz galerię</a>
+          </div>
+        </div>
 
-          <rect x="26" y="32" width="668" height="452" rx="36" fill="url(#sky)" />
-          <circle cx="570" cy="104" r="38" fill="#f0d496" opacity="0.55" />
+        <div class="hero-facts" aria-label="Najważniejsze parametry domu">
+          <div class="hero-fact">
+            <strong>995 000 zł</strong>
+            <span>Cena ofertowa</span>
+          </div>
+          <div class="hero-fact">
+            <strong>129,10 m²</strong>
+            <span>Powierzchnia całkowita</span>
+          </div>
+          <div class="hero-fact">
+            <strong>507 m²</strong>
+            <span>Działka z ogrodem</span>
+          </div>
+          <div class="hero-fact">
+            <strong>5 pokoi</strong>
+            <span>4 sypialnie i 2 łazienki</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-          <path d="M58 400C140 364 220 358 302 381C394 408 474 412 564 382C611 367 648 364 692 378V444H58Z" fill="#b5c2ab" />
-          <path d="M58 422C132 398 209 398 293 416C391 438 481 439 571 415C620 402 655 402 692 412V462H58Z" fill="#95a786" />
+    <section class="section section-alt" id="najwazniejsze">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Dlaczego warto</p>
+          <h2>Dom, który nie wymaga odkładania życia na później.</h2>
+          <p>
+            Funkcjonalny układ, gotowe wyposażenie, garaż w bryle i zadbany ogród
+            tworzą kompletne miejsce do zamieszkania od razu po zakupie.
+          </p>
+        </div>
 
-          <ellipse cx="420" cy="423" rx="184" ry="26" fill="rgba(56, 40, 27, 0.08)" />
+        <div class="feature-grid">
+          <article class="feature">
+            <div class="feature-mark">1</div>
+            <h3>Gotowy do zamieszkania</h3>
+            <p>Dom jest zadbany, regularnie serwisowany i modernizowany, m.in. z wymianą armatury i zaworów w 2025 roku.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-mark">2</div>
+            <h3>Południowy taras i ogród</h3>
+            <p>Jasny salon wychodzi na taras i ogród z nasadzeniami zapewniającymi prywatność przez cały rok.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-mark">3</div>
+            <h3>Praca zdalna bez kompromisów</h3>
+            <p>Światłowód, osobny gabinet z balkonem i klimatyzacja na obu kondygnacjach wspierają codzienny komfort.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-mark">4</div>
+            <h3>Garaż i miejsca postojowe</h3>
+            <p>Garaż w bryle budynku, siła w garażu oraz dwa dodatkowe miejsca przed domem.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-mark">5</div>
+            <h3>Bezpieczeństwo i wygoda</h3>
+            <p>System alarmowy, monitoring, rolety w oknach, ogrzewanie gazowe oraz miejskie media.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-mark">6</div>
+            <h3>Zielona okolica blisko Krakowa</h3>
+            <p>Rybna łączy ciszę, lasy i tereny spacerowe z dojazdem do miasta samochodem oraz komunikacją autobusową.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-          <g>
-            <path d="M266 247L407 152L545 247V258H266Z" fill="var(--roof)" />
-            <rect x="288" y="246" width="236" height="152" rx="16" fill="url(#houseWall)" />
-            <path d="M378 173L409 149L442 173V226H378Z" fill="#a3614c" />
-            <rect x="309" y="269" width="70" height="86" rx="12" fill="url(#glass)" stroke="rgba(88, 102, 104, 0.35)" stroke-width="3" />
-            <line x1="344" y1="269" x2="344" y2="355" stroke="rgba(88, 102, 104, 0.35)" stroke-width="3" />
-            <line x1="309" y1="312" x2="379" y2="312" stroke="rgba(88, 102, 104, 0.35)" stroke-width="3" />
+    <section class="section" id="galeria">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Galeria</p>
+          <h2>Dużo przestrzeni na zdjęcia, które sprzedają styl życia.</h2>
+          <p>
+            Układ galerii jest przygotowany pod pełną sesję fotograficzną: kilka zdjęć głównych
+            na starcie, zdjęcia wnętrz w rytmie strony oraz obszerna galeria detali.
+          </p>
+        </div>
 
-            <rect x="433" y="269" width="70" height="86" rx="12" fill="url(#glass)" stroke="rgba(88, 102, 104, 0.35)" stroke-width="3" />
-            <line x1="468" y1="269" x2="468" y2="355" stroke="rgba(88, 102, 104, 0.35)" stroke-width="3" />
-            <line x1="433" y1="312" x2="503" y2="312" stroke="rgba(88, 102, 104, 0.35)" stroke-width="3" />
+        <div class="gallery-lead">
+          <figure class="photo-slot photo-main">
+            <img src="galeria/457b5587-c044-4fd2-851e-cb947c9c0190.jpg" alt="Jasny salon z częścią jadalnianą i kuchnią" loading="lazy">
+            <span>Salon z częścią jadalnianą</span>
+          </figure>
+          <div class="photo-stack">
+            <figure class="photo-slot">
+              <img src="galeria/4fe7e3c1-53ff-4e73-b23f-19da83990c55.jpg" alt="Biała kuchnia w zabudowie z dużymi oknami" loading="lazy">
+              <span>Kuchnia w zabudowie</span>
+            </figure>
+            <figure class="photo-slot">
+              <img src="galeria/720edc1c-9ade-4747-a0a3-476cddce79ef.jpg" alt="Taras i ogród przy domu" loading="lazy">
+              <span>Taras i ogród</span>
+            </figure>
+          </div>
+        </div>
 
-            <rect x="390" y="304" width="41" height="94" rx="14" fill="#a97058" />
-            <circle cx="421" cy="349" r="4" fill="#f4e3c7" />
-            <rect x="278" y="392" width="256" height="16" rx="8" fill="var(--stone)" />
-          </g>
+        <div class="gallery-grid" aria-label="Miejsca na kolejne zdjęcia nieruchomości">
+          <figure class="photo-slot"><img src="galeria/93598faf-2fda-4612-8ebe-c5449ae92129.jpg" alt="Detal salonu z widokiem na otwartą przestrzeń dzienną" loading="lazy"><span>Detal salonu</span></figure>
+          <figure class="photo-slot"><img src="galeria/83dfae5f-2530-4eda-aba4-5a9c44a0e6c3.jpg" alt="Kuchnia z zabudową i sprzętem AGD" loading="lazy"><span>Kuchnia i AGD</span></figure>
+          <figure class="photo-slot"><img src="galeria/012751c1-7773-4fd9-875c-c6a41a62dbc6.jpg" alt="Sypialnia z jasnym wykończeniem" loading="lazy"><span>Sypialnia</span></figure>
+          <figure class="photo-slot"><img src="galeria/352575a8-0e4d-4681-acd1-9539400ebd83.jpg" alt="Pokój na poddaszu z dużym trójkątnym oknem" loading="lazy"><span>Pokój na poddaszu</span></figure>
+          <figure class="photo-slot"><img src="galeria/7584882d-165b-4b91-93bc-c2b773fc8952.jpg" alt="Pokój sypialniany z oknem" loading="lazy"><span>Pokój sypialniany</span></figure>
+          <figure class="photo-slot"><img src="galeria/42f74a66-9a16-4b22-a1a5-1bbb986df062.jpg" alt="Jasny pokój z drewnianą podłogą" loading="lazy"><span>Jasny pokój</span></figure>
+          <figure class="photo-slot"><img src="galeria/6c65c3a1-e4ac-4b06-9004-20e9d205ba7a.jpg" alt="Łazienka z wanną narożną" loading="lazy"><span>Łazienka z wanną</span></figure>
+          <figure class="photo-slot"><img src="galeria/c2bb2ea2-ef5f-4e25-af8c-d4449efef823.jpg" alt="Garaż w bryle budynku" loading="lazy"><span>Garaż w bryle</span></figure>
+          <figure class="photo-slot"><img src="galeria/95d2ec6a-b65e-4228-88dc-e5d1326eb7e9.jpg" alt="Elewacja domu widoczna zza zieleni" loading="lazy"><span>Elewacja i zieleń</span></figure>
+          <figure class="photo-slot"><img src="galeria/6a94d3ea-6207-4814-9798-b797adfd5725.jpg" alt="Dom widoczny z ogrodu" loading="lazy"><span>Dom od ogrodu</span></figure>
+          <figure class="photo-slot"><img src="galeria/5a4bec21-76e7-44e5-9c84-5d8939423044.jpg" alt="Ścieżka ogrodowa i nasadzenia" loading="lazy"><span>Ścieżka ogrodowa</span></figure>
+          <figure class="photo-slot"><img src="galeria/3bb5d2e7-8605-41da-8e25-323f15dc168f.jpg" alt="Kwiaty i trawnik przy tarasie" loading="lazy"><span>Kwiaty przy tarasie</span></figure>
+          <figure class="photo-slot"><img src="galeria/87dc0494-f346-4469-bb15-5a8cea79df6b.jpg" alt="Balkon z klimatyzacją przy domu" loading="lazy"><span>Balkon</span></figure>
+          <figure class="photo-slot"><img src="galeria/a2b6b9d2-9d7f-40ea-a9c6-2d8d4ff0cd2b.jpg" alt="Taras przy wyjściu z domu" loading="lazy"><span>Strefa tarasu</span></figure>
+          <figure class="photo-slot"><img src="galeria/2fb6683a-c6d1-4cc9-b5dc-353b4a3fde24.jpg" alt="Widok na dom i ogród" loading="lazy"><span>Widok na dom</span></figure>
+          <figure class="photo-slot"><img src="galeria/e7ef31cb-2382-4615-b9e5-376ef3065973.jpg" alt="Rośliny sezonowe w ogrodzie" loading="lazy"><span>Rośliny sezonowe</span></figure>
+          <figure class="photo-slot"><img src="galeria/8d630a58-6202-4f58-a760-a83a998b019e.jpg" alt="Kolorowe nasadzenia przy ogrodzie" loading="lazy"><span>Nasadzenia</span></figure>
+          <figure class="photo-slot"><img src="galeria/f53ea20c-da33-4c01-9c85-82d9865c66ae.jpg" alt="Okno na poddaszu z widokiem na zieleń" loading="lazy"><span>Widok z okna</span></figure>
+          <figure class="photo-slot"><img src="galeria/d6c587ba-3b65-401e-8299-b0fbdb211a5a.jpg" alt="Boczna część domu i ogród" loading="lazy"><span>Boczna część domu</span></figure>
+          <figure class="photo-slot"><img src="galeria/fc5b5e0e-b7b6-43e6-b716-2251f1562103.jpg" alt="Kuchnia z oknami i białą zabudową" loading="lazy"><span>Kuchnia z oknami</span></figure>
+        </div>
+      </div>
+    </section>
 
-          <g>
-            <path class="leaf-left" d="M222 392C205 356 214 331 248 316C267 342 267 369 247 397Z" fill="#6f8466" />
-            <path class="leaf-left" d="M248 404C229 373 233 347 265 332C286 356 286 382 271 408Z" fill="#88a07e" />
-            <path class="leaf-right" d="M560 399C577 363 570 338 536 321C516 347 515 373 534 402Z" fill="#6f8466" />
-            <path class="leaf-right" d="M534 409C553 379 550 351 518 336C497 360 497 387 511 413Z" fill="#88a07e" />
-          </g>
+    <section class="section section-alt" id="opis">
+      <div class="wrap split">
+        <div class="intro-copy">
+          <p class="eyebrow">Charakter domu</p>
+          <h2>Komfort domu pod miastem, bez utraty codziennej wygody.</h2>
+          <p>
+            Dom w zabudowie bliźniaczej, projekt „Dom w Klematisach 2”,
+            został wybudowany w technologii tradycyjnej. Ściany nośne z pustaków
+            Porotherm 25 cm, ocieplenie styropianem 15 cm i dachówka ceramiczna
+            tworzą solidną bazę pod wieloletnie użytkowanie.
+          </p>
+          <p>
+            Wnętrze jest praktyczne: parter skupia codzienne życie z salonem,
+            kuchnią i tarasem, a poddasze daje cztery pokoje, łazienkę i balkony.
+          </p>
+        </div>
 
-          <g>
-            <path d="M347 425C378 409 431 408 464 425C442 438 368 438 347 425Z" fill="#ddcfb7" />
-            <line x1="408" y1="411" x2="408" y2="435" stroke="rgba(102, 79, 55, 0.16)" stroke-width="2" />
-          </g>
+        <div class="details-grid">
+          <article class="detail">
+            <h3>Podstawowe dane</h3>
+            <ul>
+              <li>Rodzaj domu <strong>bliźniak</strong></li>
+              <li>Rok budowy <strong>2011</strong></li>
+              <li>Stan <strong>dobry</strong></li>
+              <li>Dostępność <strong>natychmiast</strong></li>
+              <li>Forma własności <strong>własność</strong></li>
+            </ul>
+          </article>
+          <article class="detail">
+            <h3>Powierzchnie</h3>
+            <ul>
+              <li>Całkowita <strong>129,10 m²</strong></li>
+              <li>Użytkowa <strong>116,61 m²</strong></li>
+              <li>Parter <strong>66,09 m²</strong></li>
+              <li>Poddasze użytkowe <strong>50,52 m²</strong></li>
+              <li>Działka <strong>507 m²</strong></li>
+            </ul>
+          </article>
+          <article class="detail">
+            <h3>Wygoda</h3>
+            <ul>
+              <li>Klimatyzacja <strong>parter i piętro</strong></li>
+              <li>Internet <strong>światłowodowy</strong></li>
+              <li>Kuchnia <strong>zabudowa + AGD</strong></li>
+              <li>Strych <strong>ocieplony, z podłogą</strong></li>
+              <li>Ogrzewanie <strong>gazowe</strong></li>
+            </ul>
+          </article>
+          <article class="detail">
+            <h3>Bezpieczeństwo</h3>
+            <ul>
+              <li>Alarm <strong>tak</strong></li>
+              <li>Monitoring <strong>tak</strong></li>
+              <li>Rolety <strong>w oknach</strong></li>
+              <li>Ogrodzenie <strong>teren ogrodzony</strong></li>
+              <li>Zasilanie awaryjne <strong>instalacja przygotowana</strong></li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
 
-          <g>
-            <rect x="570" y="120" width="18" height="276" rx="9" fill="var(--accent)" />
-            <g stroke="var(--accent-deep)" stroke-width="4" stroke-linecap="round">
-              <line x1="570" y1="152" x2="588" y2="170" />
-              <line x1="570" y1="190" x2="588" y2="208" />
-              <line x1="570" y1="228" x2="588" y2="246" />
-              <line x1="570" y1="266" x2="588" y2="284" />
-              <line x1="570" y1="304" x2="588" y2="322" />
-              <line x1="570" y1="342" x2="588" y2="360" />
-            </g>
+    <section class="section section-dark" id="uklad">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Układ pomieszczeń</p>
+          <h2>Przejrzysty plan dla rodziny, gości i pracy z domu.</h2>
+          <p>
+            Parter ma otwartą część dzienną z wyjściem na ogród, a poddasze
+            mieści cztery pokoje, łazienkę oraz dodatkową przestrzeń na przechowywanie.
+          </p>
+        </div>
 
-            <g class="crane-arm">
-              <rect x="588" y="138" width="112" height="16" rx="8" fill="var(--accent)" />
-              <line x1="606" y1="138" x2="632" y2="154" stroke="var(--accent-deep)" stroke-width="4" stroke-linecap="round" />
-              <line x1="640" y1="138" x2="666" y2="154" stroke="var(--accent-deep)" stroke-width="4" stroke-linecap="round" />
-              <line x1="674" y1="138" x2="700" y2="154" stroke="var(--accent-deep)" stroke-width="4" stroke-linecap="round" />
+        <div class="plan-grid">
+          <article class="plan">
+            <div class="plan-head">
+              <strong>Parter</strong>
+              <span>66,09 m²</span>
+            </div>
+            <ul class="room-list">
+              <li>Wiatrołap <strong>3,90 m²</strong></li>
+              <li>Garaż <strong>17,26 m²</strong></li>
+              <li>Hol <strong>7,00 m²</strong></li>
+              <li>Schody <strong>2,02 m²</strong></li>
+              <li>Salon z tarasem <strong>24,21 m²</strong></li>
+              <li>Kuchnia <strong>7,05 m²</strong></li>
+              <li>Łazienka z prysznicem <strong>pełne wyposażenie</strong></li>
+            </ul>
+          </article>
+          <article class="plan">
+            <div class="plan-head">
+              <strong>Poddasze</strong>
+              <span>50,52 m² użytkowe / 60,68 m² po podłodze</span>
+            </div>
+            <ul class="room-list">
+              <li>Hol i schody <strong>6,63 m²</strong></li>
+              <li>Gabinet z balkonem <strong>10,22 / 12,02 m²</strong></li>
+              <li>Sypialnia z balkonem <strong>10,62 / 12,41 m²</strong></li>
+              <li>Pokój gościnny <strong>7,59 / 11,04 m²</strong></li>
+              <li>Garderoba w zabudowie <strong>10,74 / 13,86 m²</strong></li>
+              <li>Łazienka z hydromasażem <strong>4,72 m²</strong></li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
 
-              <g class="crane-hook">
-                <line x1="662" y1="154" x2="662" y2="256" stroke="#8a6716" stroke-width="4" />
-                <path d="M662 256C662 270 653 280 643 280C634 280 627 274 627 266C627 258 633 251 642 251" fill="none" stroke="#8a6716" stroke-width="7" stroke-linecap="round" />
-                <rect x="643" y="214" width="38" height="22" rx="8" fill="#e2c78d" />
-              </g>
-            </g>
-          </g>
+    <section class="section section-alt" id="standard">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Standard i media</p>
+          <h2>Techniczne konkrety podane tak, żeby kupujący szybko zobaczył wartość.</h2>
+        </div>
 
-          <g opacity="0.45" stroke="var(--line)" stroke-width="2">
-            <line x1="122" y1="142" x2="176" y2="142" />
-            <line x1="140" y1="124" x2="194" y2="124" />
-          </g>
-        </svg>
+        <div class="specs">
+          <article class="spec">
+            <h3>Budowa</h3>
+            <ul class="spec-list">
+              <li>Technologia <strong>tradycyjna</strong></li>
+              <li>Materiał <strong>Porotherm 25 cm</strong></li>
+              <li>Ocieplenie <strong>styropian 15 cm</strong></li>
+              <li>Dach <strong>dachówka ceramiczna</strong></li>
+              <li>Okna <strong>plastikowe</strong></li>
+            </ul>
+          </article>
+          <article class="spec">
+            <h3>Media</h3>
+            <ul class="spec-list">
+              <li>Prąd <strong>tak</strong></li>
+              <li>Woda <strong>miejska</strong></li>
+              <li>Gaz <strong>tak</strong></li>
+              <li>Kanalizacja <strong>miejska</strong></li>
+              <li>Siła <strong>w garażu</strong></li>
+            </ul>
+          </article>
+          <article class="spec">
+            <h3>Wyposażenie</h3>
+            <ul class="spec-list">
+              <li>Kuchnia <strong>płyta, piekarnik, mikrofala</strong></li>
+              <li>AGD <strong>lodówka, zmywarka</strong></li>
+              <li>Łazienki <strong>prysznic i wanna</strong></li>
+              <li>Parking <strong>garaż + 2 miejsca</strong></li>
+              <li>Balkony <strong>2</strong></li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap lifestyle">
+        <figure class="photo-slot">
+          <img src="galeria/a2b6b9d2-9d7f-40ea-a9c6-2d8d4ff0cd2b.jpg" alt="Taras z miejscem do wypoczynku przy ogrodzie" loading="lazy">
+          <span>Taras przy ogrodzie</span>
+        </figure>
+        <div class="lifestyle-copy">
+          <p class="eyebrow">Ogród i otoczenie</p>
+          <h2>Prywatna zieleń, południowe światło i ciche sąsiedztwo.</h2>
+          <p>
+            Ogród został zaprojektowany i pielęgnowany przez profesjonalistów.
+            Nasadzenia iglaste, zimozielone i sezonowe budują naturalną prywatność,
+            a południowa ekspozycja sprawia, że salon i taras są jasne przez dużą część dnia.
+          </p>
+          <p>
+            Dojazd prowadzi kameralną drogą obsługującą jedynie kilka domów,
+            co wzmacnia poczucie spokoju i prywatności.
+          </p>
+          <div class="pill-list" aria-label="Atuty ogrodu i otoczenia">
+            <span>południowy taras</span>
+            <span>prywatne nasadzenia</span>
+            <span>teren płaski</span>
+            <span>las i łąki w okolicy</span>
+            <span>kameralne sąsiedztwo</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="lokalizacja">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Lokalizacja</p>
+          <h2>Różana 14, Rybna - spokojnie, zielono i nadal praktycznie.</h2>
+          <p>
+            Adres z pinezką na mapie: 50.03840053402806, 19.638628070549068.
+            To lokalizacja dla osób, które chcą żyć bliżej natury, bez rezygnowania
+            z codziennych usług i dojazdu do Krakowa.
+          </p>
+        </div>
+
+        <div class="map-layout">
+          <div class="map-shell">
+            <iframe
+              title="Mapa Google - Różana 14, Rybna"
+              loading="lazy"
+              allowfullscreen
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=50.03840053402806,19.638628070549068&amp;hl=pl&amp;z=16&amp;output=embed">
+            </iframe>
+          </div>
+          <aside class="nearby">
+            <h3>W zasięgu codziennych spraw</h3>
+            <p>
+              Najważniejsze punkty są blisko, a okolica pozostaje spokojna i rekreacyjna.
+            </p>
+            <ul class="near-list">
+              <li>Przychodnia <strong>650 m / ok. 9 min pieszo</strong></li>
+              <li>Przystanek autobusowy <strong>650 m / ok. 9 min pieszo</strong></li>
+              <li>Sklep Lewiatan <strong>1 km / ok. 15 min pieszo</strong></li>
+              <li>Restauracja i pizzeria <strong>w pobliżu</strong></li>
+              <li>Apteka, usługi, przedszkole i szkoła <strong>w okolicy</strong></li>
+              <li>Kraków <strong>dojazd autem lub autobusem</strong></li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="kontakt">
+      <div class="wrap">
+        <div class="cta-band">
+          <div>
+            <p class="eyebrow">Prezentacja domu</p>
+            <h2>Najlepiej ocenić ten dom na miejscu.</h2>
+            <p>
+              Umów termin oglądania, sprawdź układ pomieszczeń, światło w salonie,
+              ogród oraz dojazd do Rybnej.
+            </p>
+          </div>
+          <a class="button button-primary" href="tel:+48510297341">Zadzwoń: 510 297 341</a>
+        </div>
+
+        <div class="contact-grid">
+          <article class="contact-card">
+            <h3>Cena</h3>
+            <p>995 000 zł, czyli 7 707 zł/m² według danych z ogłoszenia.</p>
+          </article>
+          <article class="contact-card">
+            <h3>Dla kogo</h3>
+            <p>Dla rodzin, osób pracujących zdalnie oraz kupujących, którzy szukają gotowego domu z ogrodem.</p>
+          </article>
+          <article class="contact-card">
+            <h3>Zakup</h3>
+            <p>Dostępne wsparcie finansowe i prawne przy zakupie nieruchomości.</p>
+          </article>
+        </div>
       </div>
     </section>
   </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <p><strong>Dom Rybna</strong> - Różana 14, Rybna, gmina Czernichów.</p>
+      <p>Ogłoszenie ma charakter informacyjny i nie stanowi oferty w rozumieniu Kodeksu Cywilnego.</p>
+    </div>
+  </footer>
 </body>
 </html>
