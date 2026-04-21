@@ -417,6 +417,38 @@
       transform: scale(1.035);
     }
 
+    .photo-placeholder {
+      cursor: default;
+      align-items: center;
+      padding: clamp(28px, 5vw, 52px);
+      border: 1px dashed rgba(38, 59, 49, 0.34);
+      background:
+        radial-gradient(circle at 22% 18%, rgba(255, 255, 255, 0.76), transparent 30%),
+        linear-gradient(135deg, rgba(122, 154, 114, 0.22), rgba(199, 150, 67, 0.14)),
+        repeating-linear-gradient(135deg, rgba(38, 59, 49, 0.08) 0 1px, transparent 1px 20px),
+        linear-gradient(135deg, #eef2ed, #dfe7df);
+      color: var(--forest);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5), 0 18px 42px rgba(23, 32, 27, 0.08);
+    }
+
+    .photo-slot.photo-placeholder span {
+      position: static;
+      width: auto;
+      height: auto;
+      margin: 0;
+      padding: 0;
+      overflow: visible;
+      clip: auto;
+      white-space: normal;
+      border: 0;
+      color: var(--forest);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.75rem, 3.2vw, 3rem);
+      font-weight: 700;
+      line-height: 1.08;
+      text-wrap: balance;
+    }
+
     .photo-slot span {
       position: absolute;
       width: 1px;
@@ -1067,6 +1099,7 @@
       <div class="nav-links">
         <a href="#galeria">Galeria</a>
         <a href="#uklad">Układ</a>
+        <a href="#najblizsza-okolica">Okolica</a>
         <a href="#lokalizacja">Lokalizacja</a>
         <a class="button button-primary" href="tel:+48666605649">666 605 649</a>
       </div>
@@ -1398,6 +1431,38 @@
             <span>teren płaski</span>
             <span>las i łąki w okolicy</span>
             <span>kameralne sąsiedztwo</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="najblizsza-okolica">
+      <div class="wrap lifestyle">
+        <figure class="photo-slot photo-placeholder" aria-label="Miejsce na zdjęcie najbliższej okolicy">
+          <span>Miejsce na zdjęcie najbliższej okolicy</span>
+        </figure>
+        <div class="lifestyle-copy">
+          <p class="eyebrow">Najbliższa okolica</p>
+          <h2>Dwa rezerwaty, lasy i trasy, które zaczynają się tuż obok.</h2>
+          <p>
+            Obok jest Rezerwat Kajasówka - kameralny rezerwat przyrody nieożywionej,
+            znany z wapiennego zrębu tektonicznego, ścieżki geologicznej i punktów widokowych.
+          </p>
+          <p>
+            Z drugiej strony czeka Rezerwat Przyrody Dolina Potoku Rudno - leśna dolina
+            z potokiem, malowniczym przełomem oraz szlakami pieszymi i rowerowymi.
+          </p>
+          <p>
+            To świetne miejsce na rower po pracy, dłuższy spacer z aparatem fotograficznym
+            albo spokojny poranek wśród łąk i lasu. Czasami pod dom przychodzą sarny,
+            a cała okolica ma bardzo urokliwy, naturalny rytm.
+          </p>
+          <div class="pill-list" aria-label="Atuty najbliższej okolicy">
+            <span>Rezerwat Kajasówka obok</span>
+            <span>Dolina Potoku Rudno w okolicy</span>
+            <span>trasy rowerowe</span>
+            <span>spacery z aparatem</span>
+            <span>sarny pod domem</span>
           </div>
         </div>
       </div>
