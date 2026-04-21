@@ -667,6 +667,12 @@
       border-radius: var(--radius);
       border: 1px solid rgba(255, 255, 255, 0.2);
       background: rgba(255, 255, 255, 0.92);
+      cursor: zoom-in;
+    }
+
+    .floor-plan:focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 4px;
     }
 
     .floor-plan figcaption {
@@ -1487,7 +1493,7 @@
   </div>
 
   <script>
-    const galleryItems = Array.from(document.querySelectorAll(".photo-slot")).filter((item) => item.querySelector("img"));
+    const galleryItems = Array.from(document.querySelectorAll(".photo-slot, .floor-plan")).filter((item) => item.querySelector("img"));
     const lightbox = document.querySelector("#lightbox");
     const lightboxImage = lightbox.querySelector(".lightbox-image");
     const lightboxCaption = lightbox.querySelector(".lightbox-caption");
@@ -1500,7 +1506,7 @@
       currentGalleryIndex = (index + galleryItems.length) % galleryItems.length;
       const item = galleryItems[currentGalleryIndex];
       const image = item.querySelector("img");
-      const caption = item.querySelector("span")?.textContent || image.alt || "Zdjęcie domu";
+      const caption = item.querySelector("span, figcaption")?.textContent || image.alt || "Zdjęcie domu";
       lightboxImage.src = image.currentSrc || image.src;
       lightboxImage.alt = image.alt || caption;
       lightboxCaption.textContent = caption;
@@ -1524,7 +1530,7 @@
     galleryItems.forEach((item, index) => {
       item.setAttribute("tabindex", "0");
       item.setAttribute("role", "button");
-      item.setAttribute("aria-label", `Powiększ zdjęcie: ${item.querySelector("span")?.textContent || "dom"}`);
+      item.setAttribute("aria-label", `Powiększ zdjęcie: ${item.querySelector("span, figcaption")?.textContent || "dom"}`);
       item.addEventListener("click", () => openLightbox(index));
       item.addEventListener("keydown", (event) => {
         if (event.key === "Enter" || event.key === " ") {
