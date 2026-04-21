@@ -522,6 +522,8 @@
     }
 
     .plan {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
       border: 1px solid rgba(255, 255, 255, 0.18);
       border-radius: var(--radius);
       background: rgba(255, 255, 255, 0.08);
@@ -559,6 +561,27 @@
     .room-list li strong {
       color: var(--white);
       min-width: 88px;
+    }
+
+    .floor-plan {
+      margin: 0;
+      padding: 0 24px 24px;
+    }
+
+    .floor-plan img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 737 / 398;
+      object-fit: contain;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.92);
+    }
+
+    .floor-plan figcaption {
+      margin-top: 10px;
+      color: rgba(255, 255, 255, 0.68);
+      font-size: 0.92rem;
     }
 
     .specs {
@@ -1001,8 +1024,8 @@
           <p class="eyebrow">Galeria</p>
           <h2>Dużo przestrzeni na zdjęcia, które sprzedają styl życia.</h2>
           <p>
-            Układ galerii jest przygotowany pod pełną sesję fotograficzną: kilka zdjęć głównych
-            na starcie, zdjęcia wnętrz w rytmie strony oraz obszerna galeria detali.
+            Zobacz jasne wnętrza, zielony ogród i spokojną atmosferę domu, który
+            od pierwszego wejścia daje poczucie prywatności, wygody i gotowości do zamieszkania.
           </p>
         </div>
 
@@ -1136,6 +1159,10 @@
               <li>Kuchnia <strong>7,05 m²</strong></li>
               <li>Łazienka z prysznicem <strong>pełne wyposażenie</strong></li>
             </ul>
+            <figure class="floor-plan">
+              <img src="galeria/parter.jpg" alt="Rzut parteru domu w Rybnej" loading="lazy">
+              <figcaption>Rzut parteru</figcaption>
+            </figure>
           </article>
           <article class="plan">
             <div class="plan-head">
@@ -1150,6 +1177,10 @@
               <li>Garderoba w zabudowie <strong>10,74 / 13,86 m²</strong></li>
               <li>Łazienka z hydromasażem <strong>4,72 m²</strong></li>
             </ul>
+            <figure class="floor-plan">
+              <img src="galeria/pietro.jpg" alt="Rzut poddasza domu w Rybnej" loading="lazy">
+              <figcaption>Rzut poddasza</figcaption>
+            </figure>
           </article>
         </div>
       </div>
@@ -1232,9 +1263,8 @@
           <p class="eyebrow">Lokalizacja</p>
           <h2>Różana 14, Rybna - spokojnie, zielono i nadal praktycznie.</h2>
           <p>
-            Adres z pinezką na mapie: 50.03840053402806, 19.638628070549068.
             To lokalizacja dla osób, które chcą żyć bliżej natury, bez rezygnowania
-            z codziennych usług i dojazdu do Krakowa.
+            z codziennych usług i wygodnego dojazdu do Krakowa.
           </p>
         </div>
 
@@ -1255,11 +1285,11 @@
             </p>
             <ul class="near-list">
               <li>Przychodnia <strong>650 m / ok. 9 min pieszo</strong></li>
-              <li>Przystanek autobusowy <strong>650 m / ok. 9 min pieszo</strong></li>
+              <li>Przystanek autobusowy <strong>500 m / ok. 7 min pieszo</strong></li>
               <li>Sklep Lewiatan <strong>1 km / ok. 15 min pieszo</strong></li>
               <li>Restauracja i pizzeria <strong>w pobliżu</strong></li>
               <li>Apteka, usługi, przedszkole i szkoła <strong>w okolicy</strong></li>
-              <li>Kraków <strong>dojazd autem lub autobusem</strong></li>
+              <li>Kraków <strong>dojazd autem lub autobusem linią podmiejską 780</strong></li>
             </ul>
           </aside>
         </div>
