@@ -395,6 +395,12 @@
       color: var(--white);
       box-shadow: 0 18px 42px rgba(23, 32, 27, 0.11);
       isolation: isolate;
+      cursor: zoom-in;
+    }
+
+    .photo-slot:focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 4px;
     }
 
     .photo-slot img {
@@ -444,6 +450,95 @@
 
     .gallery-grid .photo-slot {
       min-height: 180px;
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(14px, 3vw, 34px);
+      background: rgba(7, 13, 10, 0.9);
+    }
+
+    .lightbox.is-open {
+      display: flex;
+    }
+
+    .lightbox-dialog {
+      width: min(100%, 1180px);
+      display: grid;
+      gap: 14px;
+    }
+
+    .lightbox-frame {
+      position: relative;
+      min-height: min(76vh, 760px);
+      display: grid;
+      place-items: center;
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+    }
+
+    .lightbox-image {
+      max-width: 100%;
+      max-height: 76vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: var(--radius);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
+    }
+
+    .lightbox-caption {
+      min-height: 24px;
+      color: rgba(255, 255, 255, 0.82);
+      font-weight: 750;
+    }
+
+    .lightbox-button {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.14);
+      color: var(--white);
+      font-size: 1.65rem;
+      line-height: 1;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+    }
+
+    .lightbox-button:hover {
+      background: rgba(255, 255, 255, 0.22);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      z-index: 2;
+    }
+
+    .lightbox-prev,
+    .lightbox-next {
+      position: absolute;
+      top: 50%;
+      z-index: 2;
+      transform: translateY(-50%);
+    }
+
+    .lightbox-prev {
+      left: 16px;
+    }
+
+    .lightbox-next {
+      right: 16px;
     }
 
     .split {
@@ -856,6 +951,36 @@
         min-height: 300px;
       }
 
+      .lightbox {
+        padding: 10px;
+      }
+
+      .lightbox-frame {
+        min-height: 68vh;
+      }
+
+      .lightbox-image {
+        max-height: 68vh;
+      }
+
+      .lightbox-button {
+        width: 40px;
+        height: 40px;
+      }
+
+      .lightbox-close {
+        top: 10px;
+        right: 10px;
+      }
+
+      .lightbox-prev {
+        left: 10px;
+      }
+
+      .lightbox-next {
+        right: 10px;
+      }
+
       .detail li,
       .spec-list li,
       .near-list li,
@@ -1094,7 +1219,7 @@
             <ul>
               <li>Rodzaj domu <strong>bliźniak</strong></li>
               <li>Rok budowy <strong>2011</strong></li>
-              <li>Stan <strong>dobry</strong></li>
+              <li>Stan <strong>bardzo dobry, do zamieszkania od razu</strong></li>
               <li>Dostępność <strong>natychmiast</strong></li>
               <li>Forma własności <strong>własność</strong></li>
             </ul>
@@ -1126,7 +1251,7 @@
               <li>Monitoring <strong>tak</strong></li>
               <li>Rolety <strong>w oknach</strong></li>
               <li>Ogrodzenie <strong>teren ogrodzony</strong></li>
-              <li>Zasilanie awaryjne <strong>instalacja przygotowana</strong></li>
+              <li>Zasilanie awaryjne <strong>instalacja przygotowana pod agregat</strong></li>
             </ul>
           </article>
         </div>
@@ -1190,7 +1315,7 @@
       <div class="wrap">
         <div class="section-head">
           <p class="eyebrow">Standard i media</p>
-          <h2>Techniczne konkrety podane tak, żeby kupujący szybko zobaczył wartość.</h2>
+          <h2>Solidny standard, wygodne media i gotowe wyposażenie na co dzień.</h2>
         </div>
 
         <div class="specs">
@@ -1334,5 +1459,93 @@
       <p>Ogłoszenie ma charakter informacyjny i nie stanowi oferty w rozumieniu Kodeksu Cywilnego.</p>
     </div>
   </footer>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lightbox-dialog" role="dialog" aria-modal="true" aria-label="Powiększone zdjęcie">
+      <div class="lightbox-frame">
+        <button class="lightbox-button lightbox-close" type="button" aria-label="Zamknij podgląd">×</button>
+        <button class="lightbox-button lightbox-prev" type="button" aria-label="Poprzednie zdjęcie">‹</button>
+        <img class="lightbox-image" src="" alt="">
+        <button class="lightbox-button lightbox-next" type="button" aria-label="Następne zdjęcie">›</button>
+      </div>
+      <div class="lightbox-caption" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <script>
+    const galleryItems = Array.from(document.querySelectorAll(".photo-slot")).filter((item) => item.querySelector("img"));
+    const lightbox = document.querySelector("#lightbox");
+    const lightboxImage = lightbox.querySelector(".lightbox-image");
+    const lightboxCaption = lightbox.querySelector(".lightbox-caption");
+    const closeButton = lightbox.querySelector(".lightbox-close");
+    const prevButton = lightbox.querySelector(".lightbox-prev");
+    const nextButton = lightbox.querySelector(".lightbox-next");
+    let currentGalleryIndex = 0;
+
+    function showGalleryImage(index) {
+      currentGalleryIndex = (index + galleryItems.length) % galleryItems.length;
+      const item = galleryItems[currentGalleryIndex];
+      const image = item.querySelector("img");
+      const caption = item.querySelector("span")?.textContent || image.alt || "Zdjęcie domu";
+      lightboxImage.src = image.currentSrc || image.src;
+      lightboxImage.alt = image.alt || caption;
+      lightboxCaption.textContent = caption;
+    }
+
+    function openLightbox(index) {
+      showGalleryImage(index);
+      lightbox.classList.add("is-open");
+      lightbox.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      closeButton.focus();
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove("is-open");
+      lightbox.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      lightboxImage.src = "";
+    }
+
+    galleryItems.forEach((item, index) => {
+      item.setAttribute("tabindex", "0");
+      item.setAttribute("role", "button");
+      item.setAttribute("aria-label", `Powiększ zdjęcie: ${item.querySelector("span")?.textContent || "dom"}`);
+      item.addEventListener("click", () => openLightbox(index));
+      item.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openLightbox(index);
+        }
+      });
+    });
+
+    closeButton.addEventListener("click", closeLightbox);
+    prevButton.addEventListener("click", () => showGalleryImage(currentGalleryIndex - 1));
+    nextButton.addEventListener("click", () => showGalleryImage(currentGalleryIndex + 1));
+    lightbox.addEventListener("click", (event) => {
+      if (event.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (!lightbox.classList.contains("is-open")) {
+        return;
+      }
+
+      if (event.key === "Escape") {
+        closeLightbox();
+      }
+
+      if (event.key === "ArrowLeft") {
+        showGalleryImage(currentGalleryIndex - 1);
+      }
+
+      if (event.key === "ArrowRight") {
+        showGalleryImage(currentGalleryIndex + 1);
+      }
+    });
+  </script>
 </body>
 </html>
